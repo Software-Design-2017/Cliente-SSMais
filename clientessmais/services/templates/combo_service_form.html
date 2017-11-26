@@ -1,0 +1,38 @@
+<h2>Combo de Serviços</h2>
+   <hr>
+   <div class="container">
+       <div class="content table-responsive table-full-width">
+       <form action="" method="post">{% csrf_token %}
+         {% for field in form %}
+         <div class="form-group">
+
+             {% for error in field.errors %}
+               <div class="alert alert-danger"role="alert">{{error}}</div>
+             {% endfor %}
+               <label for="id_{{ field.name }}">{{ field.label }}</label>
+               <div class="form-control">
+                 {{field}}
+               </div>
+           </div>
+         {% endfor %}
+
+           <table class="table">
+               {{ services.management_form }}
+               {% for form in services.forms %}
+                       <tr>
+                       {% for field in form%}
+                           <td>
+                               <fieldset class="form-group">
+                                   <div class="form-control">
+                                     {{field}}
+                                      </div>
+                               </fieldset>
+                           </td>
+                       {% endfor %}
+                   </tr>
+               {% endfor %}
+           </table>
+           <input class="btn btn-sm btn-primary btn-create" type="submit" value="Save"/>
+       </form>
+     </div>
+   </div>
