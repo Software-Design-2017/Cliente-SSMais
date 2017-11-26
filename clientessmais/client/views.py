@@ -30,7 +30,7 @@ class SearchType(SearchDecorator):
             return False
 
 class ServiceSearchNameType(ProviderSearchAndList):
-    template_name = 'list_provider.html'
+    template_name = 'list_service.html'
     form_request = SearchFormType
     type_item = None
     type_search = 'service'
