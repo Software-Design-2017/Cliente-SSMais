@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'ssmais.provider',
     'ssmais.service',
     'ssmais.search',
+    'services',
 ]
 
 MIDDLEWARE = [
