@@ -59,7 +59,7 @@ ROOT_URLCONF = 'clientessmais.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['client/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

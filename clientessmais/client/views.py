@@ -1,3 +1,9 @@
 from django.shortcuts import render
 
-# Create your views here.
+from ssmais.search.views import ProviderSearchAndList
+from ssmais.search.forms import SearchForm
+
+
+class ProviderSearchName(ProviderSearchAndList):
+    template_name = 'list_provider.html'
+    form_request = SearchForm

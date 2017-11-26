@@ -1,0 +1,76 @@
+<html>
+
+<body>
+
+  <div class="container">
+    <div class="content table-responsive table-full-width">
+      <form method='POST' action={% url 'search_provider' %}>
+        {% csrf_token %} {% for field in form %}
+        <div class="form-group">
+
+          {% for error in field.errors %}
+          <div class="alert alert-danger" role="alert">{{error}}</div>
+          {% endfor %}
+          <label for="id_{{ field.name }}">{{ field.label }}</label>
+          <div class="form-control">
+            {{field}}
+          </div>
+        </div>
+        {% endfor %}
+        <input class="btn btn-sm btn-primary btn-create" type='submit' value='Pesquisar' />
+      </form>
+    </div>
+  </div>
+
+  {% for provider in providers %}
+
+  <div class="col-md-10 col-md-offset-1">
+        <div class="row">
+  					<div class="shape">
+  						<div class="shape-text">
+  							{{ provider.name }}
+  						</div>
+  					</div>
+  					<div class="offer-content">
+  						<h2 class="lead">
+  							{{ provider.branch }}
+  						</h3>
+  						<p>
+  							<b>Descrição: </b>{{ provider.description }}
+  						</p>
+  					</div>
+  				</div>
+  			</div>
+  </div>
+  {% empty %}
+  <div class="single_features_right ">
+  <p>Não existem estabelecimentos cadastrados com essas características!!</p>
+  </div>
+  {% endfor %}
+
+  {% if is_paginated %}
+<ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+    </div>
+  </ul>
+{% endif %}
+
+</body>
+
+</html>
