@@ -1,0 +1,16 @@
+<html>
+<head>
+  <title>Bem Vindo!</title>
+</head>
+
+<body>
+  <center><h1>Olá {{user.name}}! Seja Bem Vindo!</h1></center><br>
+  <h2>Informações Pessoais:</h2>
+  <h2>Nome: {{user.name}}</h2>
+  <h2>Email: {{user.email}}</h2>
+
+  <li class="nav-item"><a href="{% url 'logout_view' %}" class="nav-link logout">Logout</a></li>
+
+</body>
+
+</html>

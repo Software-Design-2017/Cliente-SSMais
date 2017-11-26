@@ -7,18 +7,23 @@ import random
 # Django
 
 from django.shortcuts import (
-    render, redirect, get_object_or_404
+    render, redirect, render_to_response, get_object_or_404
 )
 from django.core.mail import send_mail
 from django.utils import timezone
 from django.http import HttpResponse
+# from django.contrib.auth.decorators import login_required
+
+# local Django
+from django.contrib import auth
 from django.views.generic import (
-    View
+    View, FormView
 )
 
 # local Django
 from .forms import (
     ClientRegisterForm,
+    ClientLoginForm,
 )
 from .models import (
     Client, UserProfile
@@ -109,3 +114,64 @@ class CountConfirmation(View):
         user.save()
 
         return redirect('/')
+
+
+class LoginView(FormView):
+    form_class = None
+    template_name = None
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+
+        if form.is_valid():
+            user = auth.authenticate(
+                email=form.cleaned_data['email'],
+                password=form.cleaned_data['password'],
+                )
+            if user is not None:
+                return self._verify_user_is_especific_type(request, user, form)
+            else:
+                return render(request, self.template_name, {'form': form,
+                                                            'message': constants.MESSAGE_LOGIN_ERROR})
+        else:
+            return render(request, self.template_name, {'form': form})
+
+
+class LoginClientView(LoginView):
+    form_class = ClientLoginForm
+    template_name = 'login_client.html'
+    message = None
+
+    def _verify_user_is_especific_type(self, request, user, form):
+        success_url = '/login'
+        is_client = hasattr(user, 'client')
+
+        if is_client:
+            if user.is_active:
+                auth.login(request, user)
+                return redirect(str(success_url))
+            else:
+                return HttpResponse('User is not active')
+        else:
+            message = 'Hey, parece que você não é um cliente.'
+            return render(request, self.template_name, {'form': form,
+                                                        'message': message})
+
+
+class LogoutView(View):
+    def get(self, request):
+        auth.logout(request)
+        return redirect('/')
+
+
+def loggedin(request):
+    return render_to_response('singup.html',
+                              {'user': request.user})
+
+
+def home(request):
+    return render_to_response('home.html')

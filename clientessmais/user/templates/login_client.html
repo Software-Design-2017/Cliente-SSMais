@@ -1,0 +1,50 @@
+<html>
+<head>
+  <title>Login</title>
+</head>
+
+<body>
+
+    <div>
+        <br>
+        <br>
+        <div class="row" >
+            <div class="form" >
+                <br>
+                <br>
+                <br>
+                <div>
+
+                    <form style="text-align:left" method="post" action=".">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            {% for error in form.email.errors %}
+                            <div class="alert alert-danger" role="alert">{{error}}</div>
+                            {% endfor %}
+                            <label for="{{ form.email.id_for_label }}">Email:</label> {{ form.email }}
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            {% for error in form.password.errors %}
+                            <div class="alert alert-danger" role="alert">{{error}}</div>
+                            {% endfor %}
+                            <label for="{{ form.password.id_for_label }}">Senha:</label> {{ form.password }}
+                        </div>
+                        <br>
+                        <input type="hidden" name="next" value="/" />
+                        <input class="btn btn-outline-success" type="submit" value="Entrar" />
+                    </form>
+                </div>
+                <br>
+                <div class="link">
+                  <a href="{% url 'register_client_view' %} ">Cadastre-se agora!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+</body>
+
+</html>

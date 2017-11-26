@@ -16,8 +16,12 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+from user.views import loggedin, home
+
 
 urlpatterns = [
+    url(r'^$', home, name="landing_home"),
+    url(r'^login/', loggedin, name="loggedin"),
     url(r'^admin/', admin.site.urls),
     url(r'^client/', include('client.urls')),
     url(r'^service/', include('services.urls')),
