@@ -1,4 +1,3 @@
-from django.shortcuts import render
 
 from ssmais.search_scheduling.views import ProviderSearchAndList
 from ssmais.search_scheduling.forms import SearchForm

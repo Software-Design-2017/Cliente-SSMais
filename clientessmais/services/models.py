@@ -9,6 +9,7 @@ from . import (
     constants, validators
 )
 
+
 class ServiceHair(Service):
     specific_hair = models.PositiveIntegerField(validators=[validators.validate_specific_hair],
                                                 choices=constants.SPECIFIC_HAIR_CHOICES)
