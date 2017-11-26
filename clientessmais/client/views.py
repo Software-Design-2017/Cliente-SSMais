@@ -1,4 +1,3 @@
-from django.shortcuts import render
 
 from ssmais.search_scheduling.views import (
     ProviderSearchAndList, SearchDecorator, SearchName
