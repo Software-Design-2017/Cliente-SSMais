@@ -37,9 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'services',
+    'ssmais.search_scheduling',
     'client',
-    'ssmais'
+    'services',
 ]
 
 MIDDLEWARE = [
@@ -82,6 +82,8 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+AUTH_USER_MODEL = "search_scheduling.User"
 
 
 # Password validation

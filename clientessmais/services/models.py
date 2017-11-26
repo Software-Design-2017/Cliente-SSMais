@@ -2,7 +2,7 @@
 from django.db import models
 
 # third party
-from ssmais.service.models import Service
+from ssmais.search_scheduling.models import Service
 
 # Local Django
 from . import (

@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
 
 # Create your views here.
-from ssmais.service.views import ServiceComboCreate
-from ssmais.provider.models import Provider
+from ssmais.search_scheduling.views import ServiceComboCreate
+from ssmais.search_scheduling.models import Provider
 
 
 

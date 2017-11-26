@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
-from ssmais.search.views import ProviderSearchAndList
-from ssmais.search.forms import SearchForm
+from ssmais.search_scheduling.views import ProviderSearchAndList
+from ssmais.search_scheduling.forms import SearchForm
 
 
 class ProviderSearchName(ProviderSearchAndList):
