@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import (
+    ServiceHair, ServiceBeard
+)
+
+admin.site.register(ServiceHair)
+admin.site.register(ServiceBeard)
