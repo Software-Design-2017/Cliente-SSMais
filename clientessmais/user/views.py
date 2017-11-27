@@ -12,7 +12,7 @@ from django.shortcuts import (
 from django.core.mail import send_mail
 from django.utils import timezone
 from django.http import HttpResponse
-# from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 
 # local Django
 from django.contrib import auth
@@ -161,17 +161,16 @@ class LoginClientView(LoginView):
             return render(request, self.template_name, {'form': form,
                                                         'message': message})
 
+    @login_required
+    def loggedin(request):
+        return render_to_response('singup.html',
+                                  {'user': request.user})
+
 
 class LogoutView(View):
     def get(self, request):
         auth.logout(request)
         return redirect('/')
 
-
-def loggedin(request):
-    return render_to_response('singup.html',
-                              {'user': request.user})
-
-
-def home(request):
-    return render_to_response('home.html')
+    def home(request):
+        return render_to_response('home.html')

@@ -22,7 +22,7 @@ class ClientRegisterForm(forms.ModelForm):
                                label='PASSWORD')
 
     password_confirmation = forms.CharField(widget=forms.PasswordInput,
-                                            label='PASSWORD_CONFIRMATION')
+                                            label='PASSWORD CONFIRMATION')
 
     phone_number = forms.CharField(label='PHONE',
                                    max_length=14)
